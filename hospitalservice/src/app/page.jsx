@@ -1,9 +1,9 @@
 import Image from "next/image";
-
+import Box from "@mui/material/Box";
 export default function Home() {
   return (
-    <div className="bg-white h-full w-full">
-      <h6>Emiliano se la come</h6>
-    </div>
+    <Box>
+      
+    </Box>
   );
 }
