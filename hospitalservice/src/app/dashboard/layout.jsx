@@ -8,9 +8,7 @@ export default function AboutLayout({
   children,
 }) {
   return (
-    <html lang="en">
      <StyledEngineProvider injectFirst>
-      <body className="">
         <Box className="max-h-screen h-screen flex flex-col">
           <DashHeader></DashHeader>
           <Box className="flex h-full w-full">
@@ -20,8 +18,6 @@ export default function AboutLayout({
             </Box>  
           </Box>
         </Box>
-      </body>
       </StyledEngineProvider>
-    </html>
   );
 }

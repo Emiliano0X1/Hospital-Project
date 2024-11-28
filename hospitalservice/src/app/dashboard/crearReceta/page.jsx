@@ -12,7 +12,7 @@ export default function Home() {
       <Box className="p-6 h-full">
         <Card className="h-full text-black">
           <CardContent>
-            <Typography variant="h1">Bienvenido a Rhamed</Typography>
+            <Typography variant="h1">Crear Receta</Typography>
           </CardContent>
         </Card>
       </Box>

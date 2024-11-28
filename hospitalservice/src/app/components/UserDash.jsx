@@ -9,8 +9,8 @@ export default function UserDash() {
         <Avatar alt="rhamses" src="/rhamases.jpg"></Avatar>
       </Box>
       <Box className="flex flex-col mr-5 text-slate-950">
-        <Box className=""> <Typography>Rhamses</Typography> </Box>
-        <Box className="text-xs "> <Typography className="text-xs">Doctor</Typography></Box>
+        <Box className="text-white"> <Typography>Rhamses</Typography> </Box>
+        <Box className="text-white text-xs "> <Typography className="text-xs">Doctor</Typography></Box>
       </Box>
     </Box>
   );

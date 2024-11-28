@@ -8,9 +8,10 @@ export default function Home() {
     <Box className="bg-white flex max-h-screen h-screen">
       <Box className="m-4 bg-red-700 flex flex-col w-2/3 rounded-3xl justify-center">
         <Box className="flex flex-col items-center">
-          <Typography variant="h1" className="mb-10">Rhamed</Typography>
+          <Typography variant="h1" className="mb-10">
+            Rhamed
+          </Typography>
           <Typography variant="h3">Inicio Sesión</Typography>
-
         </Box>
         <Box className="flex flex-col m-24 rounded-xl bg-white">
           <TextField
@@ -18,7 +19,11 @@ export default function Home() {
             color="tertiary"
             className="m-4 rounded-xl"
           ></TextField>
-          <TextField label="Contraseña" color="tertiary"className="m-4"></TextField>
+          <TextField
+            label="Contraseña"
+            color="tertiary"
+            className="m-4"
+          ></TextField>
         </Box>
         <Box className="flex justify-center">
           <Button

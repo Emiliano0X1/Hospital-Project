@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { StyledEngineProvider } from "@mui/material";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -20,11 +21,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+       <StyledEngineProvider injectFirst>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
+      </StyledEngineProvider>
     </html>
   );
 }
