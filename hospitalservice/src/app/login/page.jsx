@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 export default function Home() {
   return (
     <Box className="bg-white flex max-h-screen h-screen">
-      <Box className="m-4 bg-red-700 flex flex-col w-2/3 rounded-3xl justify-center">
+      <Box className="m-4 bg-green-700 flex flex-col w-2/3 rounded-3xl justify-center">
         <Box className="flex flex-col items-center">
           <Typography variant="h1" className="mb-10">
             Rhamed
