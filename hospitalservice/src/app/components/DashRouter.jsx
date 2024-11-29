@@ -7,7 +7,7 @@ const DashRouter = () => {
       <Box>
       <NavButtons></NavButtons>
         </Box>  
-        <Box className="p-2 border-t border-white border-t-2">
+        <Box className="p-2 border-white border-t-2">
         <UserDash></UserDash>
       </Box>
     </Box>

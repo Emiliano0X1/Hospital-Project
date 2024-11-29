@@ -7,12 +7,21 @@ import ListItemText from "@mui/material/ListItemText";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ImageIcon from "@mui/icons-material/Image";
+import Link from "next/link";
 
 let buttons = [
-  { text: "Pacientes", route: "/pacientes", icon: <ImageIcon /> },
-  { text: "Crear expediente", route: "/crearExpediente", icon: <ImageIcon /> },
-  { text: "Crear receta", route: "/crearReceta", icon: <ImageIcon /> },
-  { text: "Registro de emergencia", route: "/registrarEmergencia", icon: <ImageIcon /> },
+  { text: "Pacientes", route: "/dashboard/pacientes", icon: <ImageIcon /> },
+  {
+    text: "Crear expediente",
+    route: "/dashboard/crearExpediente",
+    icon: <ImageIcon />,
+  },
+  { text: "Crear receta", route: "/dashboard/crearReceta", icon: <ImageIcon /> },
+  {
+    text: "Registro de emergencia",
+    route: "/dashboard/registrarEmergencia",
+    icon: <ImageIcon />,
+  },
 ];
 
 export default function NavButtons() {
@@ -22,14 +31,10 @@ export default function NavButtons() {
         <List dense>
           {buttons.map((button, index) => {
             return (
-              <ListItemButton
-                className="rounded-lg flex"
-                href={button.route}
-                key={index}
-              >
-                <ListItemIcon>{button.icon}</ListItemIcon>
-                <ListItemText primary={button.text} />
-              </ListItemButton>
+                <ListItemButton component={Link} href = {button.route} className="rounded-lg flex" key={index}>
+                  <ListItemIcon>{button.icon}</ListItemIcon>
+                  <ListItemText primary={button.text} />
+                </ListItemButton>
             );
           })}
         </List>
