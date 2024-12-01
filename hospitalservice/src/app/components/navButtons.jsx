@@ -15,7 +15,6 @@ import ArticleIcon from "@mui/icons-material/Article";
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 
-
 let buttons = [
   {
     text: "Pacientes",

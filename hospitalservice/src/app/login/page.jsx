@@ -1,9 +1,79 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Image from "next/image";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Alert } from "@mui/material";
 import { Typography } from "@mui/material";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+
+//On Click Function
+const login = async (nombre,password) => {
+  try {
+    console.log(nombre)
+    console.log(password)
+    const response = await fetch("http://localhost:8080/api/v1/usuario/login", {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          nombre : nombre,
+          password: password
+        }),
+    });
+
+    console.log('Response Status:', response.status);
+
+    if(!response.ok){
+      const errorData = await response.json()
+      console.log("No funciono correctamente", errorData);
+      return 1;
+
+    }
+
+    else{
+      const result = await response.json();
+      console.log("Login Exitoso",result)
+      return 0;
+
+    }
+
+  } catch (error) {
+    console.log("Error fatal en el sistema")
+    return 1;
+  }
+
+};
+
 
 export default function Home() {
+
+  const [nombre,setNombre] = useState('');
+  const [password,setPassword] = useState('');
+
+  const router = useRouter();
+
+  const manageLogin = async (nombre,password) => {
+
+    const siJalo = await login(nombre,password);
+
+    console.log(siJalo)
+
+    if(siJalo === 1){
+      alert("No se pudo realizar el login , Intentalo de Nuevo")
+    }
+
+    else{
+      router.push("/dashboard")
+    }
+}
+
+
+
   return (
     <Box className="bg-white flex max-h-screen h-screen">
       <Box className="m-4 bg-green-700 flex flex-col w-2/3 rounded-3xl justify-center">
@@ -18,11 +88,15 @@ export default function Home() {
             label="Usuario"
             color="tertiary"
             className="m-4 rounded-xl"
+            onChange={(e) => setNombre(e.target.value)}
+            value={nombre}
           ></TextField>
           <TextField
             label="Contraseña"
             color="tertiary"
             className="m-4"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           ></TextField>
         </Box>
         <Box className="flex justify-center">
@@ -30,6 +104,7 @@ export default function Home() {
             className="m-4 text-black bg-white"
             size="large"
             variant="contained"
+            onClick={() => manageLogin(nombre,password)}
           >
             Iniciar sesión
           </Button>
