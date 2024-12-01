@@ -3,12 +3,15 @@ import Box from "@mui/material/Box";
 import { StyledEngineProvider } from "@mui/material";
 import DashHeader from "../components/DashHeader";
 import DashRouter from "../components/DashRouter";
+import UserProvider from "../Context/contextAPI";
+
 ///
 export default function AboutLayout({
   children,
 }) {
   return (
      <StyledEngineProvider injectFirst>
+      
         <Box className="max-h-screen h-screen flex flex-col">
           <DashHeader></DashHeader>
           <Box className="flex h-full w-full ">

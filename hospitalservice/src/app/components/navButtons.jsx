@@ -14,41 +14,49 @@ import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import ArticleIcon from "@mui/icons-material/Article";
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
+export default function NavButtons({userRole}) {
 
-let buttons = [
-  {
-    text: "Pacientes",
-    route: "/dashboard/Paciente",
-    icon: <AccessibilityNewIcon />,
-  },
-  {
-    text: "Expedientes",
-    route: "/dashboard/Expediente",
-    icon: <ArticleIcon />,
-  },
-  {
-    text: "Recetas",
-    route: "/dashboard/Receta",
-    icon: <MedicationIcon />,
-  },
-  {
-    text: "Registros de emergencia",
-    route: "/dashboard/Emergencia",
-    icon: <LocalHospitalIcon />,
-  },
-  {
-    text: "Citas",
-    route: "/dashboard/Citas",
-    icon: <AssignmentIndIcon />,
-  },
-];
+  let buttons = [
+    {
+      text: "Pacientes",
+      route: "/dashboard/Paciente",
+      icon: <AccessibilityNewIcon />,
+      roles : ["recepcionistaPersonal"]
+    },
+    {
+      text: "Expedientes",
+      route: "/dashboard/Expediente",
+      icon: <ArticleIcon />,
+      roles : ["medico"]
+    },
+    {
+      text: "Recetas",
+      route: "/dashboard/Receta",
+      icon: <MedicationIcon />,
+      roles : ["medico"]
+    },
+    {
+      text: "Registros de emergencia",
+      route: "/dashboard/Emergencia",
+      icon: <LocalHospitalIcon />,
+      roles : ["recepcionista", "recepcionistaPersonal"]
+    },
+    {
+      text: "Citas",
+      route: "/dashboard/Citas",
+      icon: <AssignmentIndIcon />,
+      roles : ["recepcionista", "recepcionistaPersonal"]
+    },
+  ];
 
-export default function NavButtons() {
+
+  const roleButtons = buttons.filter(button => button.roles.includes(userRole))
+
   return (
     <Box className="w-full h-full p-2 rounded-lg text-white">
       <Stack>
         <List className="" dense>
-          {buttons.map((button, index) => {
+          {roleButtons.map((button, index) => {
             return (
               <ListItemButton
                 component={Link}

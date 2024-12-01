@@ -6,14 +6,15 @@ import { Button, TextField, Alert } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import NavButtons from "../components/NavButtons";
+import { useUser }  from "../Context/contextAPI";
 
 //On Click Function
 const login = async (nombre,password) => {
   try {
     console.log(nombre)
     console.log(password)
-    const response = await fetch("http://localhost:8080/api/v1/usuario/login", {
+    const response = await fetch("", {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -55,12 +56,14 @@ export default function Home() {
   const [nombre,setNombre] = useState('');
   const [password,setPassword] = useState('');
 
+
+  const {userRole} = useUser();
+
   const router = useRouter();
 
   const manageLogin = async (nombre,password) => {
 
     const siJalo = await login(nombre,password);
-
     console.log(siJalo)
 
     if(siJalo === 1){
@@ -68,11 +71,12 @@ export default function Home() {
     }
 
     else{
+      console.log("Este es el nombre antes de asignarlo al userRole",nombre)
+      userRole(nombre);
+    
       router.push("/dashboard")
     }
 }
-
-
 
   return (
     <Box className="bg-white flex max-h-screen h-screen">
@@ -119,5 +123,6 @@ export default function Home() {
         />
       </Box>
     </Box>
+
   );
 }
