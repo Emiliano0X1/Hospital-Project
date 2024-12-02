@@ -55,7 +55,6 @@ export default function FormDialogEmergency() {
 
 
   const [open, setOpen] = React.useState(false);
-
   const [nombre,setNombre] = useState('');
   const [edad,setEdad] = useState (0);
   const [razonDeIngreso,setRazonDeIngreso] = useState('');
