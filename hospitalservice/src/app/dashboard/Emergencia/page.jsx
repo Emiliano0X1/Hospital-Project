@@ -20,7 +20,7 @@ export default function Home() {
 
   const fetchEmergencias = async() => {
       try{
-        const response = await fetch("")
+        const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/emergencias")
         
         if(!response.ok){
           throw new Error("Error en la obtencion de datos")

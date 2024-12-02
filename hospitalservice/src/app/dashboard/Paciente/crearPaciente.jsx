@@ -15,7 +15,7 @@ const crearPaciente = async (nombre,telefono,razonDeVisita,citaId) => {
       console.log(nombre)
       console.log(telefono)
 
-      const response = await fetch(`http://192.168.1.73:8080/api/v1/paciente/${citaId}`, {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${citaId}`, {
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -50,7 +50,7 @@ const crearPaciente = async (nombre,telefono,razonDeVisita,citaId) => {
   };
 
 
-export default function FormDialog() {
+export default function FormDialogPaciente() {
 
 
   const [open, setOpen] = React.useState(false);
@@ -145,7 +145,7 @@ export default function FormDialog() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita(nombre,telefono,razonDeVisita,citaId)}>Crear</Button>
+          <Button type="submit" onClick={() => crearPaciente(nombre,telefono,razonDeVisita,citaId)}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

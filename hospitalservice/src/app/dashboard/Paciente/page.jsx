@@ -11,7 +11,8 @@ import { EditRoad } from "@mui/icons-material";
 import CitaCard from "../../components/CitaCard";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material"
-import FormDialog from "../Citas/agendarCita"
+import FormDialogPaciente from "../Citas/agendarCita"
+
 
 export default function Home() {
 
@@ -19,7 +20,7 @@ export default function Home() {
 
   const fetchPaciente = async() => {
       try{
-        const response = await fetch("http://192.168.1.73:8080/api/v1/paciente")
+        const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/paciente")
         
         if(!response.ok){
           throw new Error("Error en la obtencion de datos")
@@ -42,7 +43,7 @@ export default function Home() {
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
         <Card className="h-full overflow-scroll text-black">
-          <FormDialog></FormDialog>
+          <FormDialogPaciente></FormDialogPaciente>
 
           <Button
               className="mr-4 text-black bg-white"

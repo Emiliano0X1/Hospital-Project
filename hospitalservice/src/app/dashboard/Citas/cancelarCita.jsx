@@ -13,7 +13,7 @@ import { useState } from 'react';
 const borrarCita = async (id) => {
     try {
       console.log(id)
-      const response = await fetch(``, {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/cita/${id}`, {
           method: 'DELETE',
           headers: {
               Accept: 'application/json',

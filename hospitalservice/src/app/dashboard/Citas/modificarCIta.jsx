@@ -13,7 +13,7 @@ import { useState } from 'react';
 const modificarCita = async (id,fecha) => {
     try {
       console.log(fecha)
-      const response = await fetch(``, {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/cita/${id}?fecha=${fecha}`, {
           method: 'PATCH',
           headers: {
               Accept: 'application/json',
