@@ -44,7 +44,7 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   
       else{
         const result = await response.json();
-        console.log("Se registro la cita Exitsamente",result)
+        console.log("Se registro la cita Exitosamente",result)
   
       }
   
@@ -96,7 +96,7 @@ export default function FormDialog() {
         <DialogTitle>Agendar Cita : DAY ONE</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor llene los datos que se requeiren
+            Por favor llene los datos que se requieren
           </DialogContentText>
           <TextField
             autoFocus
