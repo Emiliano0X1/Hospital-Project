@@ -7,7 +7,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Paper, Typography } from "@mui/material"
-import { Typography } from "@mui/material";
 import { EditRoad } from "@mui/icons-material";
 import CitaCard from "../../components/CitaCard";
 import { useEffect, useState } from "react";
