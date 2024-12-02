@@ -22,7 +22,7 @@ const login = async (nombre,password) => {
         },
         credentials: 'include',
         body: JSON.stringify({
-          nombre : nombre,
+          nombre : nombre ,
           password: password
         }),
     });
