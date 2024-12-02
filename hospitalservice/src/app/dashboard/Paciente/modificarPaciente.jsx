@@ -10,15 +10,24 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const modificarCita = async (id,fecha) => {
+const modificarPaciente = async (id,nombre,telefono,razonDeVisita) => {
     try {
-      console.log(fecha)
-      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/cita/${id}?fecha=${fecha}`, {
-          method: 'PATCH',
+      console.log(id)
+      console.log(nombre)
+      console.log(telefono)
+      console.log(razonDeVisita)
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${id}`, {
+          method: 'PUT',
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            nombre : nombre,
+            razonDeVisita : razonDeVisita,
+            telefono : telefono,
+          }),
+
           credentials: 'include',
       });
   
@@ -41,11 +50,13 @@ const modificarCita = async (id,fecha) => {
   };
 
 
-export default function FormDialogDate() {
+export default function FormDialogPacienteEdit() {
 
   const [open, setOpen] = React.useState(false);
-  const [citaId,setCitaId] = useState(0);
-  const [fecha,setFecha] = useState('');
+  const [pacienteId,setPacienteId] = useState(0);
+  const [nombre,setNombre] = useState('');
+  const [telefono,setTelefono] = useState('');
+  const [razonDeVisita,setRazonDeVisita] = useState('');
 
 
   const handleClickOpen = () => {
@@ -63,7 +74,7 @@ export default function FormDialogDate() {
         className=" text-black bg-white"
         size="large"
         onClick={handleClickOpen}>
-        Modificar Fecha
+        Modificar Paciente
       </Button>
       <Dialog
         open={open}
@@ -80,39 +91,63 @@ export default function FormDialogDate() {
           },
         }}
       >
-        <DialogTitle>Modificar Cita : DATE</DialogTitle>
+        <DialogTitle>Modificar Paciente : I want to Sleep</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor ingrese la nueva fecha de la cita
+            Por favor ingrese la nueva informacion del paciente
           </DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="id-cita"
-            label="Cita-ID"
+            name="id-paciente"
+            label="Paciente-ID"
             type="text"
             fullWidth
             variant="standard"
-            onChange = {(e) => setCitaId(e.target.value)}
+            onChange = {(e) => setPacienteId(e.target.value)}
           />
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="fecha"
-            label="Fecha"
+            name="name"
+            label="Nombre"
             type="text"
             fullWidth
             variant="standard"
-            onChange = {(e) => setFecha(e.target.value)}
+            onChange = {(e) => setNombre(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="telefono"
+            label="Telefono"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange = {(e) => setTelefono(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="razonDeVisita"
+            label="Razon de Visita"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange = {(e) => setRazonDeVisita(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => modificarCita(citaId,fecha)}>Modificar</Button>
+          <Button type="submit" onClick={() => modificarPaciente(pacienteId,nombre,telefono,razonDeVisita)}>Modificar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

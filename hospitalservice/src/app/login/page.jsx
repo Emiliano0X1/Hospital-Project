@@ -33,14 +33,12 @@ const login = async (nombre,password) => {
       const errorData = await response.json()
       console.log("No funciono correctamente", errorData);
       return 1;
-
     }
 
     else{
       const result = await response.json();
       console.log("Login Exitoso",result)
       return 0;
-
     }
 
   } catch (error) {
@@ -53,15 +51,15 @@ const login = async (nombre,password) => {
 
 export default function Home() {
 
-  const [nombre,setNombre] = useState('');
-  const [password,setPassword] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [password, setPassword] = useState('');
 
 
   const {userRole} = useUser();
 
   const router = useRouter();
 
-  const manageLogin = async (nombre,password) => {
+  const manageLogin = async (nombre , password) => {
 
     const siJalo = await login(nombre,password);
     console.log(siJalo)
