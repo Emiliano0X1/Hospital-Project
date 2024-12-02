@@ -29,7 +29,6 @@ const modificarCita = async (id,fecha) => {
         console.log("No funciono correctamente", errorData);
 
       }
-  
       
         const result = await response.json();
         console.log("Se registro la cita Exitsamente",result)

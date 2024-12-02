@@ -10,27 +10,40 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const borrarCita = async (id) => {
+const agendarCita = async (nombre,edad,razonDeIngreso) => {
     try {
-      console.log(id)
-      const response = await fetch(``, {
-          method: 'DELETE',
+      console.log(nombre)
+      console.log(edad)
+ 
+
+      const response = await fetch("", {
+          method: 'POST',
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
           credentials: 'include',
+          body: JSON.stringify({
+            nombre : nombre,
+            edad: edad, 
+            razonDeIngreso : razonDeIngreso
+          }),
       });
   
       console.log('Response Status:', response.status);
   
       if(!response.ok){
-        console.log("No funciono correctamente");
+        const errorData = await response.json()
+        console.log("No funciono correctamente", errorData);
 
       }
-
-    console.log("Se registro la cita Exitsamente")
-
+  
+      else{
+        const result = await response.json();
+        console.log("Se registro la cita Exitosamente",result)
+  
+      }
+  
     } catch (error) {
       console.log("Error fatal en el sistema")
     }
@@ -38,10 +51,15 @@ const borrarCita = async (id) => {
   };
 
 
-export default function FormDialogDelete() {
+export default function FormDialogEmergency() {
+
 
   const [open, setOpen] = React.useState(false);
-  const [citaId,setCitaId] = useState(0);
+
+  const [nombre,setNombre] = useState('');
+  const [edad,setEdad] = useState (0);
+  const [razonDeIngreso,setRazonDeIngreso] = useState('');
+ 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,11 +72,9 @@ export default function FormDialogDelete() {
   return (
     <React.Fragment>
       <Button 
-        variant="contained"
-        className=" text-black bg-red-500"
-        size="large"
+        variant="outlined" 
         onClick={handleClickOpen}>
-        Borrar
+        Atender Emergencias
       </Button>
       <Dialog
         open={open}
@@ -75,27 +91,52 @@ export default function FormDialogDelete() {
           },
         }}
       >
-        <DialogTitle>Borrar Cita : DELETE</DialogTitle>
+        <DialogTitle>Atender Emergencia : I want to jump froma highway</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor, ESTE COMPLETAMENTE SEGURO DE QUE ESTA ELIMINANDO LA CITA CORRECTA
+            Por favor llene los datos que se requieren RAPIDO SE MUERE EL PACIENTE
           </DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="id-cita"
-            label="Cita-ID"
+            name="nombre"
+            label="Nombre"
             type="text"
             fullWidth
             variant="standard"
-            onChange = {(e) => setCitaId(e.target.value)}
+            onChange={(e) => setNombre(e.target.value)}
+
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="edad"
+            label="Edad"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => setEdad(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="razonDeIngreso"
+            label="Razon de Ingreso"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange = {(e) => setRazonDeIngreso(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => borrarCita(citaId)}>Borrar PERMANENTEMENTE</Button>
+          <Button type="submit" onClick={() => agendarCita(nombre,edad,razonDeIngreso)}>CREAR</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
