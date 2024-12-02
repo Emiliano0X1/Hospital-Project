@@ -9,7 +9,7 @@ export default function UserDash({datos}) {
         <Avatar alt="rhamses" src="/rhamases.jpg"></Avatar>
       </Box>
       <Box className="flex flex-col mr-5 text-slate-950">
-        <Box className="text-black"> <Typography>Rhamses</Typography> </Box>
+        <Box className="text-black"> <Typography>Hola Rhamses!</Typography> </Box> 
         <Box className="text-white text-xs "> <Typography className="text-xs"></Typography></Box>
       </Box>
     </Box>
