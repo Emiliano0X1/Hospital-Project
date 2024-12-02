@@ -23,7 +23,7 @@ const crearPaciente = async (nombre,telefono,razonDeVisita,citaId) => {
           },
           credentials: 'include',
           body: JSON.stringify({
-            nombre : nombre,
+            name : nombre,
             telefono : telefono,
             razonDeVisita : razonDeVisita
           }),

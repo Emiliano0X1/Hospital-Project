@@ -7,7 +7,6 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Paper, Typography } from "@mui/material"
-import { Typography } from "@mui/material";
 import { EditRoad } from "@mui/icons-material";
 import CitaCard from "../../components/CitaCard";
 import { useEffect, useState } from "react";
@@ -45,9 +44,7 @@ export default function Home() {
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
         <Paper className="h-full text-black" elevation={24}>
-          <Typography variant="h1">Registrar Emergencia</Typography>
-        </Paper>
-
+         
         <Card className="h-full overflow-scroll text-black">
           <FormDialogEmergency></FormDialogEmergency>
 
@@ -66,6 +63,8 @@ export default function Home() {
             })}
           </CardContent>
         </Card>
+
+        </Paper>
       </Box>
     </Box>
   );
