@@ -12,7 +12,7 @@ export default function UserDash({datos}) {
       <Box className="flex mr-3 items-center">
       </Box>
       <Box className="flex flex-col mr-5 text-slate-950">
-        <Box className="text-black"> <Typography>Rhamses</Typography> </Box>
+        <Box className="text-black"> <Typography>Hola Rhamses!</Typography> </Box> 
         <Box className="text-black text-xs "> <Typography className="text-xs">{usuario.user}</Typography></Box>
       </Box>
     </Box>
