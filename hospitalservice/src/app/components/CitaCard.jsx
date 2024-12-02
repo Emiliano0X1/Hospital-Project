@@ -13,13 +13,11 @@ export default function CitaCard({ index, cita }) {
       <Card className=" bg-slate-100 text-black">
         <CardContent className="flex justify-between">
           <Box>
-            <Typography variant="h6">{cita.nombre}</Typography>
-            <Typography variant="h6">{cita.fecha}</Typography>
-            <Typography variant="h6">{cita.edad}</Typography>
-            <Typography variant="h6">{cita.consultorio}</Typography>
-            <Typography variant="h6">{cita.telefono}</Typography>
-            <Typography variant="h6">{cita.medico}</Typography>
-            <Typography variant="h6">{cita.motivo}</Typography>
+            <Typography variant="h6">Nombre del solicitante : {cita.nombre}</Typography>
+            <Typography variant="h6">Fecha : {cita.fecha}</Typography>
+            <Typography variant="h6">Edad : {cita.edad}</Typography>
+            <Typography variant="h6">Telefono : {cita.telefono}</Typography>
+            <Typography variant="h6">Nombre del Medico: {cita.nombreMedico}</Typography>
           </Box>
           <Box>
             <Typography variant="h6">Acciones</Typography>
