@@ -16,7 +16,7 @@ import TextField from '@mui/material/TextField';
 const asignarConsultorio = async (id,consultorioId) => {
     try {
       console.log(id)
-      const response = await fetch(``, {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/cita/consultorio/${id}?consultorio_id=${consultorioId}`, {
           method: 'PATCH',
           headers: {
               Accept: 'application/json',

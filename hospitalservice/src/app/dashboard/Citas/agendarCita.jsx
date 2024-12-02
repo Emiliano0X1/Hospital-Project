@@ -18,7 +18,7 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
       console.log(edad)
       console.log(nombreMedico)
 
-      const response = await fetch("", {
+      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/cita", {
           method: 'POST',
           headers: {
               Accept: 'application/json',
