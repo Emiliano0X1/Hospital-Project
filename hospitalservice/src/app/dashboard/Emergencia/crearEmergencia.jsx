@@ -10,15 +10,13 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
+const agendarCita = async (nombre,edad,razonDeIngreso) => {
     try {
       console.log(nombre)
-      console.log(fecha)
-      console.log(telefono)
       console.log(edad)
-      console.log(nombreMedico)
+ 
 
-      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/cita", {
+      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/emergencias", {
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -27,10 +25,8 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
           credentials: 'include',
           body: JSON.stringify({
             nombre : nombre,
-            fecha: fecha,
             edad: edad, 
-            telefono : telefono,
-            nombreMedico : nombreMedico
+            razonDeIngreso : razonDeIngreso
           }),
       });
   
@@ -55,15 +51,14 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   };
 
 
-export default function FormDialog() {
+export default function FormDialogEmergency() {
 
 
   const [open, setOpen] = React.useState(false);
   const [nombre,setNombre] = useState('');
-  const [fecha,setFecha] = useState('');
   const [edad,setEdad] = useState (0);
-  const [telefono,setTelefono] = useState('');
-  const [nombreMedico,setNombreMedico] = useState('');
+  const [razonDeIngreso,setRazonDeIngreso] = useState('');
+ 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -75,8 +70,10 @@ export default function FormDialog() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Agendar Cita
+      <Button 
+        variant="outlined" 
+        onClick={handleClickOpen}>
+        Atender Emergencias
       </Button>
       <Dialog
         open={open}
@@ -93,10 +90,10 @@ export default function FormDialog() {
           },
         }}
       >
-        <DialogTitle>Agendar Cita : DAY ONE</DialogTitle>
+        <DialogTitle>Atender Emergencia : I want to jump froma highway</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor llene los datos que se requieren
+            Por favor llene los datos que se requieren RAPIDO SE MUERE EL PACIENTE
           </DialogContentText>
           <TextField
             autoFocus
@@ -116,18 +113,6 @@ export default function FormDialog() {
             required
             margin="dense"
             id="name"
-            name="fecha"
-            label="Fecha"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange = {(e) => setFecha(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
             name="edad"
             label="Edad"
             type="text"
@@ -140,29 +125,17 @@ export default function FormDialog() {
             required
             margin="dense"
             id="name"
-            name="telefono"
-            label="Telefono"
+            name="razonDeIngreso"
+            label="Razon de Ingreso"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setTelefono(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="nombreMedico"
-            label="Nombre del Medico"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => setNombreMedico(e.target.value)}
+            onChange = {(e) => setRazonDeIngreso(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita(nombre,fecha,edad,telefono,nombreMedico)}>Agendar</Button>
+          <Button type="submit" onClick={() => agendarCita(nombre,edad,razonDeIngreso)}>CREAR</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

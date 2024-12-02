@@ -11,7 +11,7 @@ const DashRouter = () => {
   console.log("El user en DasRouter",user)
 
   return (
-    <Box className="flex flex-col justify-between bg-green-800 w-80">
+    <Box className="flex flex-col justify-between bg-green-600 w-80">
       <Box>
       <NavButtons userRole={user.user}></NavButtons>
         </Box>  
@@ -25,4 +25,3 @@ const DashRouter = () => {
 
 
 export default DashRouter;
-

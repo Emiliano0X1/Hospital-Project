@@ -14,7 +14,7 @@ const login = async (nombre,password) => {
   try {
     console.log(nombre)
     console.log(password)
-    const response = await fetch("http://192.168.1.73:8080/api/v1/usuario/login", {
+    const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/usuario/login", {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -22,7 +22,7 @@ const login = async (nombre,password) => {
         },
         credentials: 'include',
         body: JSON.stringify({
-          nombre : nombre,
+          nombre : nombre ,
           password: password
         }),
     });
@@ -33,14 +33,12 @@ const login = async (nombre,password) => {
       const errorData = await response.json()
       console.log("No funciono correctamente", errorData);
       return 1;
-
     }
 
     else{
       const result = await response.json();
       console.log("Login Exitoso",result)
       return 0;
-
     }
 
   } catch (error) {
@@ -53,15 +51,15 @@ const login = async (nombre,password) => {
 
 export default function Home() {
 
-  const [nombre,setNombre] = useState('');
-  const [password,setPassword] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [password, setPassword] = useState('');
 
 
   const {userRole} = useUser();
 
   const router = useRouter();
 
-  const manageLogin = async (nombre,password) => {
+  const manageLogin = async (nombre , password) => {
 
     const siJalo = await login(nombre,password);
     console.log(siJalo)
@@ -116,7 +114,7 @@ export default function Home() {
       </Box>
       <Box className="rounded-3xl m-4 bg-white flex relative w-2/5 max-h-full max-w-full overflow-hidden">
         <Image
-          src="/rhamsquat.jpg"
+          src="/rhamsquatpro.jpg"
           alt="Paramedic"
           objectFit="cover"
           layout="fill"

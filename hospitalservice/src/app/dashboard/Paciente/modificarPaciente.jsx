@@ -10,28 +10,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
+const modificarPaciente = async (id,nombre,telefono,razonDeVisita) => {
     try {
+      console.log(id)
       console.log(nombre)
-      console.log(fecha)
       console.log(telefono)
-      console.log(edad)
-      console.log(nombreMedico)
-
-      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/cita", {
-          method: 'POST',
+      console.log(razonDeVisita)
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/change/${id}?nombre=${nombre}&razonDeVisita=${telefono}&telefono=${razonDeVisita}`, {
+          method: 'PATCH',
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
           credentials: 'include',
-          body: JSON.stringify({
-            nombre : nombre,
-            fecha: fecha,
-            edad: edad, 
-            telefono : telefono,
-            nombreMedico : nombreMedico
-          }),
       });
   
       console.log('Response Status:', response.status);
@@ -41,12 +32,10 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
         console.log("No funciono correctamente", errorData);
 
       }
-  
-      else{
+      
         const result = await response.json();
-        console.log("Se registro la cita Exitosamente",result)
-  
-      }
+        console.log("Se registro la cita Exitsamente",result)
+
   
     } catch (error) {
       console.log("Error fatal en el sistema")
@@ -55,15 +44,14 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   };
 
 
-export default function FormDialog() {
-
+export default function FormDialogPacienteEdit() {
 
   const [open, setOpen] = React.useState(false);
+  const [pacienteId,setPacienteId] = useState(0);
   const [nombre,setNombre] = useState('');
-  const [fecha,setFecha] = useState('');
-  const [edad,setEdad] = useState (0);
   const [telefono,setTelefono] = useState('');
-  const [nombreMedico,setNombreMedico] = useState('');
+  const [razonDeVisita,setRazonDeVisita] = useState('');
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -75,8 +63,12 @@ export default function FormDialog() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Agendar Cita
+      <Button 
+        variant="contained"
+        className=" text-black bg-white"
+        size="large"
+        onClick={handleClickOpen}>
+        Modificar Paciente
       </Button>
       <Dialog
         open={open}
@@ -93,47 +85,34 @@ export default function FormDialog() {
           },
         }}
       >
-        <DialogTitle>Agendar Cita : DAY ONE</DialogTitle>
+        <DialogTitle>Modificar Paciente : I want to Sleep</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor llene los datos que se requieren
+            Por favor ingrese la nueva informacion del paciente
           </DialogContentText>
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="nombre"
+            name="id-paciente"
+            label="Paciente-ID"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange = {(e) => setPacienteId(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="name"
             label="Nombre"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setNombre(e.target.value)}
-
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="fecha"
-            label="Fecha"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange = {(e) => setFecha(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="edad"
-            label="Edad"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => setEdad(e.target.value)}
+            onChange = {(e) => setNombre(e.target.value)}
           />
           <TextField
             autoFocus
@@ -145,24 +124,24 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setTelefono(e.target.value)}
+            onChange = {(e) => setTelefono(e.target.value)}
           />
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="nombreMedico"
-            label="Nombre del Medico"
+            name="razonDeVisita"
+            label="Razon de Visita"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setNombreMedico(e.target.value)}
+            onChange = {(e) => setRazonDeVisita(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita(nombre,fecha,edad,telefono,nombreMedico)}>Agendar</Button>
+          <Button type="submit" onClick={() => modificarPaciente(pacienteId,nombre,telefono,razonDeVisita)}>Modificar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

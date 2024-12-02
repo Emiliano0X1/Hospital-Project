@@ -10,15 +10,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
+const crearPaciente = async (nombre,telefono,razonDeVisita,citaId) => {
     try {
       console.log(nombre)
-      console.log(fecha)
       console.log(telefono)
-      console.log(edad)
-      console.log(nombreMedico)
 
-      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/cita", {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${citaId}`, {
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -26,11 +23,9 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
           },
           credentials: 'include',
           body: JSON.stringify({
-            nombre : nombre,
-            fecha: fecha,
-            edad: edad, 
+            name : nombre,
             telefono : telefono,
-            nombreMedico : nombreMedico
+            razonDeVisita : razonDeVisita
           }),
       });
   
@@ -44,7 +39,7 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   
       else{
         const result = await response.json();
-        console.log("Se registro la cita Exitosamente",result)
+        console.log("Se creo al Paciente Exitosamente",result)
   
       }
   
@@ -55,15 +50,15 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   };
 
 
-export default function FormDialog() {
+export default function FormDialogPaciente() {
 
 
   const [open, setOpen] = React.useState(false);
+
   const [nombre,setNombre] = useState('');
-  const [fecha,setFecha] = useState('');
-  const [edad,setEdad] = useState (0);
   const [telefono,setTelefono] = useState('');
-  const [nombreMedico,setNombreMedico] = useState('');
+  const [razonDeVisita,setRazonDeVisita] = useState('');
+  const [citaId,setCitaId] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -76,7 +71,7 @@ export default function FormDialog() {
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Agendar Cita
+        Crear Paciente
       </Button>
       <Dialog
         open={open}
@@ -93,7 +88,7 @@ export default function FormDialog() {
           },
         }}
       >
-        <DialogTitle>Agendar Cita : DAY ONE</DialogTitle>
+        <DialogTitle>Crear Paciente : DAY ONE</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Por favor llene los datos que se requieren
@@ -116,30 +111,6 @@ export default function FormDialog() {
             required
             margin="dense"
             id="name"
-            name="fecha"
-            label="Fecha"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange = {(e) => setFecha(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="edad"
-            label="Edad"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={(e) => setEdad(e.target.value)}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="name"
             name="telefono"
             label="Telefono"
             type="text"
@@ -152,17 +123,29 @@ export default function FormDialog() {
             required
             margin="dense"
             id="name"
-            name="nombreMedico"
-            label="Nombre del Medico"
+            name="razonDeVisita"
+            label="Razon De Visita"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setNombreMedico(e.target.value)}
+            onChange={(e) => setRazonDeVisita(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="cita_id"
+            label="Cita Id"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => setCitaId(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita(nombre,fecha,edad,telefono,nombreMedico)}>Agendar</Button>
+          <Button type="submit" onClick={() => crearPaciente(nombre,telefono,razonDeVisita,citaId)}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
