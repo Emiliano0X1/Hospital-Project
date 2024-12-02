@@ -18,6 +18,8 @@ import {
   DialogTitle,
 } from "@mui/material";
 
+
+
 const crearExpediente = async (id, expediente) => {
   try {
     const response = await fetch(
@@ -28,7 +30,7 @@ const crearExpediente = async (id, expediente) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            expediente: expediente, 
+          expediente: expediente,
         }),
       }
     );
@@ -51,8 +53,10 @@ const crearExpediente = async (id, expediente) => {
 export default function Expediente() {
   const fetchExpediente = async (data) => {
     if (data.expediente != null) {
+      alert("El expediente ya existe");
       showButtons(true);
       showNuevoExpediente(false);
+      setExpediente(data.expediente);
       return;
     } else {
       showNuevoExpediente(true);
@@ -79,6 +83,8 @@ export default function Expediente() {
   const [expediente, setExpediente] = useState("");
   const [buttons, showButtons] = useState(false);
   const [nuevoExpediente, showNuevoExpediente] = useState(false);
+  const [expedienteData, setExpedienteData] = useState(false);
+  const [mostrarExpediente, setMostrarExpediente] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -132,7 +138,9 @@ export default function Expediente() {
                   className=" text-black bg-white"
                   size="large"
                   variant="contained"
-                  onClick={() => fetchId(ID)}
+                  onClick={() =>
+                    setExpedienteData(true) && setMostrarExpediente(false)
+                  }
                 >
                   Actualizar Historial
                 </Button>
@@ -140,12 +148,20 @@ export default function Expediente() {
                   className="m-4 text-black bg-white"
                   size="large"
                   variant="contained"
-                  onClick={() => fetchId(ID)}
+                  onClick={() =>
+                    setMostrarExpediente(true) && setExpedienteData(false)
+                  }
                 >
                   Consultar Historial
                 </Button>
               </Box>
             )}
+            {expedienteData && 
+               (<Box>
+                <Typography variant="body1">{expediente.historial}</Typography>
+              </Box>)
+            }
+
             {nuevoExpediente && (
               <Box className="w-1/2">
                 <Alert variant="filled" severity="error">
@@ -193,7 +209,10 @@ export default function Expediente() {
                     <Button
                       type="submit"
                       onClick={() =>
-                        crearExpediente(ID, expediente) && handleClose() && showButtons(false) && showNuevoExpediente(false)
+                        crearExpediente(ID, expediente) &&
+                        handleClose() &&
+                        showButtons(false) &&
+                        showNuevoExpediente(false)
                       }
                     >
                       CREAR
@@ -202,41 +221,6 @@ export default function Expediente() {
                 </Dialog>
               </Box>
             )}
-            {/* <Dialog
-            open={open}
-            onClose={handleClose}
-            fullWidth={true}
-            fullScreen={false}
-            maxWidth="sm"
-          >
-            <DialogTitle>Ingrese su historial médico</DialogTitle>
-            <DialogContent>
-              <TextField
-                autoFocus
-                label="Expediente"
-                type="text"
-                color="tertiary"
-                variant="filled"
-                onChange={(e) => setExpediente(e.target.value)}
-                sx={{
-                  width: "100%",
-                  fontSize: "1.5rem",
-                  input: {
-                    fontSize: "1.5rem",
-                  },
-                }}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose}>Cancelar</Button>
-              <Button
-                type="submit"
-                onClick={() => crearExpediente(expediente) && handleClose()}
-              >
-                CREAR
-              </Button>
-            </DialogActions>
-          </Dialog> */}
             <Box className="h-20"></Box>
           </Box>
         </Paper>
