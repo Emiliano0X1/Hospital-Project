@@ -114,7 +114,7 @@ export default function Home() {
       </Box>
       <Box className="rounded-3xl m-4 bg-white flex relative w-2/5 max-h-full max-w-full overflow-hidden">
         <Image
-          src="/rhamsquatpro.jpg"
+          src="/rhamsquatpro.png"
           alt="Paramedic"
           objectFit="cover"
           layout="fill"
