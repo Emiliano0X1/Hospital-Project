@@ -10,13 +10,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 
 
-const agendarCita = async (nombre,edad,razonDeIngreso) => {
+const crearPaciente = async (nombre,telefono,razonDeVisita,citaId) => {
     try {
       console.log(nombre)
-      console.log(edad)
- 
+      console.log(telefono)
 
-      const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/emergencias", {
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${citaId}`, {
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -25,8 +24,8 @@ const agendarCita = async (nombre,edad,razonDeIngreso) => {
           credentials: 'include',
           body: JSON.stringify({
             nombre : nombre,
-            edad: edad, 
-            razonDeIngreso : razonDeIngreso
+            telefono : telefono,
+            razonDeVisita : razonDeVisita
           }),
       });
   
@@ -40,7 +39,7 @@ const agendarCita = async (nombre,edad,razonDeIngreso) => {
   
       else{
         const result = await response.json();
-        console.log("Se registro la cita Exitosamente",result)
+        console.log("Se creo al Paciente Exitosamente",result)
   
       }
   
@@ -51,15 +50,15 @@ const agendarCita = async (nombre,edad,razonDeIngreso) => {
   };
 
 
-export default function FormDialogEmergency() {
+export default function FormDialogPaciente() {
 
 
   const [open, setOpen] = React.useState(false);
 
   const [nombre,setNombre] = useState('');
-  const [edad,setEdad] = useState (0);
-  const [razonDeIngreso,setRazonDeIngreso] = useState('');
- 
+  const [telefono,setTelefono] = useState('');
+  const [razonDeVisita,setRazonDeVisita] = useState('');
+  const [citaId,setCitaId] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -71,10 +70,8 @@ export default function FormDialogEmergency() {
 
   return (
     <React.Fragment>
-      <Button 
-        variant="outlined" 
-        onClick={handleClickOpen}>
-        Atender Emergencias
+      <Button variant="outlined" onClick={handleClickOpen}>
+        Crear Paciente
       </Button>
       <Dialog
         open={open}
@@ -91,10 +88,10 @@ export default function FormDialogEmergency() {
           },
         }}
       >
-        <DialogTitle>Atender Emergencia : I want to jump froma highway</DialogTitle>
+        <DialogTitle>Crear Paciente : DAY ONE</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Por favor llene los datos que se requieren RAPIDO SE MUERE EL PACIENTE
+            Por favor llene los datos que se requieren
           </DialogContentText>
           <TextField
             autoFocus
@@ -114,29 +111,41 @@ export default function FormDialogEmergency() {
             required
             margin="dense"
             id="name"
-            name="edad"
-            label="Edad"
+            name="telefono"
+            label="Telefono"
             type="text"
             fullWidth
             variant="standard"
-            onChange={(e) => setEdad(e.target.value)}
+            onChange={(e) => setTelefono(e.target.value)}
           />
           <TextField
             autoFocus
             required
             margin="dense"
             id="name"
-            name="razonDeIngreso"
-            label="Razon de Ingreso"
+            name="razonDeVisita"
+            label="Razon De Visita"
             type="text"
             fullWidth
             variant="standard"
-            onChange = {(e) => setRazonDeIngreso(e.target.value)}
+            onChange={(e) => setRazonDeVisita(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="name"
+            name="cita_id"
+            label="Cita Id"
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => setCitaId(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita(nombre,edad,razonDeIngreso)}>CREAR</Button>
+          <Button type="submit" onClick={() => crearPaciente(nombre,telefono,razonDeVisita,citaId)}>Crear</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

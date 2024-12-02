@@ -6,6 +6,7 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
+import { Paper, Typography } from "@mui/material"
 import { Typography } from "@mui/material";
 import { EditRoad } from "@mui/icons-material";
 import CitaCard from "../../components/CitaCard";
@@ -14,13 +15,14 @@ import { Button } from "@mui/material"
 import EmergenciaCard from "../../components/EmergenciaCard";
 import FormDialogEmergency from "../Emergencia/crearEmergencia"
 
+
 export default function Home() {
 
   const [emergencias,setEmergencias] = useState([]);
 
   const fetchEmergencias = async() => {
       try{
-        const response = await fetch("")
+        const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/emergencias")
         
         if(!response.ok){
           throw new Error("Error en la obtencion de datos")
@@ -42,6 +44,10 @@ export default function Home() {
   return (
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
+        <Paper className="h-full text-black" elevation={24}>
+          <Typography variant="h1">Registrar Emergencia</Typography>
+        </Paper>
+
         <Card className="h-full overflow-scroll text-black">
           <FormDialogEmergency></FormDialogEmergency>
 

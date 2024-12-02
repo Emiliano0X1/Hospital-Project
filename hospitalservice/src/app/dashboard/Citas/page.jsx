@@ -19,7 +19,7 @@ export default function Home() {
 
   const fetchCitas = async() => {
       try{
-        const response = await fetch("http://192.168.1.73:8080/api/v1/cita")
+        const response = await fetch("https://backend-hospital-8aqk.onrender.com/api/v1/cita")
         
         if(!response.ok){
           throw new Error("Error en la obtencion de datos")
