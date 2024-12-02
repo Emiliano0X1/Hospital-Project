@@ -13,7 +13,6 @@ import TextField from "@mui/material/TextField";
 import { useState } from "react";
 
 export default function Home() {
-
   // Crear los estados para los campos de texto
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
