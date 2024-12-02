@@ -7,7 +7,6 @@ import CardActions from "@mui/material/CardActions";
 import { Typography } from "@mui/material";
 
 export default function Home() {
-  console.log("hola papu")
   return (
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
