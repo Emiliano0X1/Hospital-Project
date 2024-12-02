@@ -24,7 +24,6 @@ export default function CitaCard({ index, cita }) {
             <Typography variant="h6">Edad : {cita.edad}</Typography>
             <Typography variant="h6">Telefono : {cita.telefono}</Typography>
             <Typography variant="h6">Nombre del Medico: {cita.nombreMedico}</Typography>
-            <Typography variant="h6">Consultorio: </Typography>
           </Box>
           <Box>
             <Typography variant="h6">Acciones</Typography>

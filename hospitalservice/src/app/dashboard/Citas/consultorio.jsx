@@ -32,7 +32,7 @@ const asignarConsultorio = async (id,consultorioId) => {
 
       }
 
-    console.log("Se asigno el consultorio Exitosamente")
+    alert(`Se ha asignado el Consultorio ${consultorioId} con la cita ${id}`)
 
     } catch (error) {
       console.log("Error fatal en el sistema")
