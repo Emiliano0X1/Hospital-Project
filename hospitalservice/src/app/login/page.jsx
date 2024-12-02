@@ -14,7 +14,7 @@ const login = async (nombre,password) => {
   try {
     console.log(nombre)
     console.log(password)
-    const response = await fetch("", {
+    const response = await fetch("http://192.168.1.73:8080/api/v1/usuario/login", {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -67,7 +67,7 @@ export default function Home() {
     console.log(siJalo)
 
     if(siJalo === 1){
-      alert("No se pudo realizar el login , Intentalo de Nuevo")
+      alert("El usuario no existe")
     }
 
     else{
