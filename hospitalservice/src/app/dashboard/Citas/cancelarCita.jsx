@@ -13,7 +13,7 @@ import { useState } from 'react';
 const borrarCita = async (id) => {
     try {
       console.log(id)
-      const response = await fetch(`http://192.168.1.73:8080/api/v1/cita/${id}`, {
+      const response = await fetch( {
           method: 'DELETE',
           headers: {
               Accept: 'application/json',

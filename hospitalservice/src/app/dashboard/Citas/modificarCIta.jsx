@@ -13,7 +13,7 @@ import { useState } from 'react';
 const modificarCita = async (id,fecha) => {
     try {
       console.log(fecha)
-      const response = await fetch(`http://192.168.1.73:8080/api/v1/cita/${id}?fecha=${fecha}`, {
+      const response = await fetch(``, {
           method: 'PATCH',
           headers: {
               Accept: 'application/json',

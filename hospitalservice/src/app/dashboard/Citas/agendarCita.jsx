@@ -18,7 +18,7 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
       console.log(edad)
       console.log(nombreMedico)
 
-      const response = await fetch("http://192.168.1.73:8080/api/v1/cita", {
+      const response = await fetch("", {
           method: 'POST',
           headers: {
               Accept: 'application/json',
