@@ -44,9 +44,7 @@ export default function Home() {
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
         <Paper className="h-full text-black" elevation={24}>
-          <Typography variant="h1">Registrar Emergencia</Typography>
-        </Paper>
-
+         
         <Card className="h-full overflow-scroll text-black">
           <FormDialogEmergency></FormDialogEmergency>
 
@@ -65,6 +63,8 @@ export default function Home() {
             })}
           </CardContent>
         </Card>
+
+        </Paper>
       </Box>
     </Box>
   );

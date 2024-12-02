@@ -11,7 +11,8 @@ import { EditRoad } from "@mui/icons-material";
 import CitaCard from "../../components/CitaCard";
 import { useEffect, useState } from "react";
 import { Button } from "@mui/material"
-import FormDialogPaciente from "../Citas/agendarCita"
+import FormDialogPaciente from "../Paciente/crearPaciente";
+import PacienteCard from "../../components/PacienteCard";
 
 
 export default function Home() {
@@ -51,12 +52,12 @@ export default function Home() {
               variant="contained"
               onClick={fetchPaciente}
             >
-              Refresh
+              Generar Listado De Pacientes
             </Button>
 
           <CardContent>
             {pacientes.map((paciente, index) => {
-              return <PacienteCard key={index} paciente={paciente} />;
+              return <PacienteCard key={index} paciente={paciente}/>;
             })}
           </CardContent>
         </Card>
