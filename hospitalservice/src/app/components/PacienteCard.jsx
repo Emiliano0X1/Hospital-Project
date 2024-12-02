@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
-
+import FormDialogPacienteEdit from "../dashboard/Paciente/modificarPaciente";
 
 export default function EmergenciaCard({ index, paciente }) {
   return (
@@ -23,6 +23,7 @@ export default function EmergenciaCard({ index, paciente }) {
           </Box>
           <Box>
             <Typography variant="h6">Acciones</Typography>
+            <FormDialogPacienteEdit></FormDialogPacienteEdit>
               
           </Box>
         </CardContent>
