@@ -16,34 +16,26 @@ import FormDialog from "../Citas/agendarCita"
 export default function Home() {
 
   const [citas,setCitas] = useState([]);
-  const[visible,setVisible] = useState(false);
 
   const fetchCitas = async() => {
       try{
-        useEffect(() => {
+        const response = await fetch("http://192.168.1.73:8080/api/v1/cita")
+        
+        if(!response.ok){
+          throw new Error("Error en la obtencion de datos")
+        }
 
-           fetch("http://192.168.1.73:8080/api/v1/cita")
-          .then((res) => {
-             return res.json();
-          })
-          .then((data) => {
-            setCitas(data);
-          });
-        }, []);
-      } catch (error){
-        console.log("Ocurrio un error en la obtencion de datos")
+        const data = await response.json();
+        setCitas(data);
+      }catch(error){
+        console.log("Error fatal en el sistema", error)
       }
-  }
 
-  fetchCitas();
+  };
 
-
-  const showForm = () => {
-      setVisible(true);
-  }
-
-  
-
+  useEffect(() => {
+    fetchCitas();
+  },[]);
 
 
   return (
@@ -51,6 +43,16 @@ export default function Home() {
       <Box className="p-6 h-full">
         <Card className="h-full overflow-scroll text-black">
           <FormDialog></FormDialog>
+
+          <Button
+              className="mr-4 text-black bg-white"
+              size="large"
+              variant="contained"
+              onClick={fetchCitas}
+            >
+              Refresh
+            </Button>
+
           <CardContent>
             {citas.map((cita, index) => {
               return <CitaCard key={index} cita={cita} />;

@@ -13,8 +13,12 @@ import { useState } from 'react';
 const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
     try {
       console.log(nombre)
-      console.log(password)
-      const response = await fetch("", {
+      console.log(fecha)
+      console.log(telefono)
+      console.log(edad)
+      console.log(nombreMedico)
+
+      const response = await fetch("http://192.168.1.73:8080/api/v1/cita", {
           method: 'POST',
           headers: {
               Accept: 'application/json',
@@ -58,6 +62,7 @@ export default function FormDialog() {
   const [nombre,setNombre] = useState('');
   const [fecha,setFecha] = useState('');
   const [edad,setEdad] = useState (0);
+  const [telefono,setTelefono] = useState('');
   const [nombreMedico,setNombreMedico] = useState('');
 
   const handleClickOpen = () => {
@@ -67,12 +72,6 @@ export default function FormDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleCita = () => {
-
-
-  }
-
 
   return (
     <React.Fragment>
@@ -109,6 +108,7 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(e) => setNombre(e.target.value)}
 
           />
           <TextField
@@ -121,6 +121,7 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            onChange = {(e) => setFecha(e.target.value)}
           />
           <TextField
             autoFocus
@@ -132,6 +133,7 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(e) => setEdad(e.target.value)}
           />
           <TextField
             autoFocus
@@ -143,6 +145,7 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(e) => setTelefono(e.target.value)}
           />
           <TextField
             autoFocus
@@ -154,11 +157,12 @@ export default function FormDialog() {
             type="text"
             fullWidth
             variant="standard"
+            onChange={(e) => setNombreMedico(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type="submit" onClick={() => agendarCita()}>Agendar</Button>
+          <Button type="submit" onClick={() => agendarCita(nombre,fecha,edad,telefono,nombreMedico)}>Agendar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>
