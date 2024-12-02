@@ -8,7 +8,6 @@ import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import FormDialogPacienteEdit from "../dashboard/Paciente/modificarPaciente";
 
-
 export default function EmergenciaCard({ index, paciente }) {
   return (
     <Box className="p-6 h-full">

@@ -32,7 +32,7 @@ const asignarConsultorio = async (id,consultorioId) => {
 
       }
 
-    console.log("Se asigno el consultorio Exitosamente")
+    alert(`Se ha asignado el Consultorio ${consultorioId} con la cita ${id}`)
 
     } catch (error) {
       console.log("Error fatal en el sistema")
@@ -42,6 +42,7 @@ const asignarConsultorio = async (id,consultorioId) => {
 
 
 export default function ConsultorioSelect() {
+
   const [citaId,setCitaId] = React.useState(0);
   const [consultorio, setConsultorio] = React.useState(0);
 
@@ -130,3 +131,5 @@ export default function ConsultorioSelect() {
   </React.Fragment> 
   );
 }
+
+

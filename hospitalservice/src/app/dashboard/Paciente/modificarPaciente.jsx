@@ -16,18 +16,12 @@ const modificarPaciente = async (id,nombre,telefono,razonDeVisita) => {
       console.log(nombre)
       console.log(telefono)
       console.log(razonDeVisita)
-      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${id}`, {
-          method: 'PUT',
+      const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/paciente/change/${id}?nombre=${nombre}&razonDeVisita=${telefono}&telefono=${razonDeVisita}`, {
+          method: 'PATCH',
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({
-            nombre : nombre,
-            razonDeVisita : razonDeVisita,
-            telefono : telefono,
-          }),
-
           credentials: 'include',
       });
   

@@ -9,8 +9,10 @@ import { Button } from "@mui/material";
 import FormDialogDate from "../dashboard/Citas/modificarCIta";
 import FormDialogDelete from "../dashboard/Citas/cancelarCita";
 import ConsultorioSelect from "../dashboard/Citas/consultorio";
+import { getConsultorioId } from "../dashboard/Citas/consultorio";
 
 export default function CitaCard({ index, cita }) {
+
   return (
     <Box className="p-6 h-full">
       <Card className=" bg-slate-100 text-black">
