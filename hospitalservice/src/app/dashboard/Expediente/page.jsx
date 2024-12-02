@@ -77,7 +77,6 @@ const crearExpediente = async (id, expediente) => {
 export default function Expediente() {
   const fetchExpediente = async (data) => {
     if (data.expediente != null) {
-      alert("El expediente ya existe");
       console.log(data.expediente);
       showButtons(true);
       showNuevoExpediente(false);
