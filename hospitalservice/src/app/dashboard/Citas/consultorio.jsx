@@ -42,6 +42,7 @@ const asignarConsultorio = async (id,consultorioId) => {
 
 
 export default function ConsultorioSelect() {
+
   const [citaId,setCitaId] = React.useState(0);
   const [consultorio, setConsultorio] = React.useState(0);
 
@@ -130,3 +131,5 @@ export default function ConsultorioSelect() {
   </React.Fragment> 
   );
 }
+
+
