@@ -4,12 +4,12 @@ import {MoreVertIcon} from "@mui/icons-material/MoreVert";
 import { grey } from "@mui/material/colors";
 export default function UserDash({datos}) {
   return (
-    <Box className="flex items-center h-16 ">
+    <Box className="flex items-center h-16 bg-green-300">
       <Box className="flex mr-3 items-center">
         <Avatar alt="rhamses" src="/rhamases.jpg"></Avatar>
       </Box>
       <Box className="flex flex-col mr-5 text-slate-950">
-        <Box className="text-white"> <Typography>Rhamses</Typography> </Box>
+        <Box className="text-black"> <Typography>Rhamses</Typography> </Box>
         <Box className="text-white text-xs "> <Typography className="text-xs"></Typography></Box>
       </Box>
     </Box>
