@@ -16,8 +16,6 @@ export default function UserProvider({children}){
         setNombre(nombre);
         console.log("userRole actualizado con:", nombre);
     }
-
-    
     
     return(
         <UserContext.Provider value = {{user,nombre,setUserRole, userRole}}>

@@ -6,6 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import { Typography } from "@mui/material";
 import { Button } from "@mui/material";
+import FormDialogDate from "../dashboard/Citas/modificarCIta";
+import FormDialogDelete from "../dashboard/Citas/cancelarCita";
 
 export default function CitaCard({ index, cita }) {
   return (
@@ -21,20 +23,8 @@ export default function CitaCard({ index, cita }) {
           </Box>
           <Box>
             <Typography variant="h6">Acciones</Typography>
-            <Button
-              className="mr-4 text-black bg-white"
-              size="large"
-              variant="contained"
-            >
-              Actualizar Fecha
-            </Button>
-            <Button
-              className=" text-black bg-red-500"
-              size="large"
-              variant="contained"
-            >
-              Borrar
-            </Button>
+              <FormDialogDate></FormDialogDate>
+              <FormDialogDelete></FormDialogDelete>
           </Box>
         </CardContent>
       </Card>
