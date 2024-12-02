@@ -44,7 +44,7 @@ const agendarCita = async (nombre,fecha,edad,telefono,nombreMedico) => {
   
       else{
         const result = await response.json();
-        console.log("Se registro la cita Exitsamente",result)
+        console.log("Se registro la cita Exitosamente",result)
   
       }
   
