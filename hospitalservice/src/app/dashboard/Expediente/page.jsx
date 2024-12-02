@@ -18,7 +18,31 @@ import {
   DialogTitle,
 } from "@mui/material";
 
+const actualizarHistorial = async (id, nuevo) => {
 
+  const response = await fetch(
+    `https://backend-hospital-8aqk.onrender.com/api/v1/paciente/${id}`
+  );
+  if (!response.ok) {
+    console.error("Error al actualizar el expediente:", errorData);
+    alert("Hubo un error al actualizar el expediente. Intenta nuevamente.");
+    return;
+  } else {
+    const result = await response.json();
+    const response2 = await fetch(
+      `https://backend-hospital-8aqk.onrender.com/api/v1/expediente/${result.id}?historial=${nuevo}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+    console.log("Expediente actualizado exitosamente:", result);
+  }
+};
 
 const crearExpediente = async (id, expediente) => {
   try {
@@ -54,6 +78,7 @@ export default function Expediente() {
   const fetchExpediente = async (data) => {
     if (data.expediente != null) {
       alert("El expediente ya existe");
+      console.log(data.expediente);
       showButtons(true);
       showNuevoExpediente(false);
       setExpediente(data.expediente);
@@ -74,17 +99,20 @@ export default function Expediente() {
     }
     setNotFound(false);
     const data = await response.json();
+    console.log(data);
     fetchExpediente(data);
   };
 
   const [ID, setID] = useState("");
   const [notFound, setNotFound] = useState(false);
   const [open, setOpen] = useState(false);
-  const [expediente, setExpediente] = useState("");
+  const [expediente, setExpediente] = useState(null);
   const [buttons, showButtons] = useState(false);
   const [nuevoExpediente, showNuevoExpediente] = useState(false);
-  const [expedienteData, setExpedienteData] = useState(false);
   const [mostrarExpediente, setMostrarExpediente] = useState(false);
+  const [historial, setHistorial] = useState("");
+  const [textHistorial, setTextHistorial] = useState(false);
+  const [yay, setYay] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,6 +122,13 @@ export default function Expediente() {
     setOpen(false);
   };
 
+  const handleClickOpenHistorial = () => {
+    setTextHistorial(true);
+  };
+
+  const handleCloseHistorial = () => {
+    setTextHistorial(false);
+  };
   return (
     <Box className="bg-white w-full h-full">
       <Box className="p-6 h-full">
@@ -118,7 +153,7 @@ export default function Expediente() {
                 onClick={() =>
                   fetchId(ID) &&
                   showButtons(false) &&
-                  showNuevoExpediente(false)
+                  showNuevoExpediente(false) && setMostrarExpediente(false) && setYay(false) && setTextHistorial(false) 
                 }
               >
                 Crear
@@ -138,29 +173,51 @@ export default function Expediente() {
                   className=" text-black bg-white"
                   size="large"
                   variant="contained"
-                  onClick={() =>
-                    setExpedienteData(true) && setMostrarExpediente(false)
-                  }
+                  onClick={handleClickOpenHistorial}
                 >
                   Actualizar Historial
                 </Button>
+               
+
                 <Button
                   className="m-4 text-black bg-white"
                   size="large"
                   variant="contained"
-                  onClick={() =>
-                    setMostrarExpediente(true) && setExpedienteData(false)
-                  }
+                  onClick={() => setMostrarExpediente(true)}
                 >
                   Consultar Historial
                 </Button>
               </Box>
             )}
-            {expedienteData && 
-               (<Box>
-                <Typography variant="body1">{expediente.historial}</Typography>
-              </Box>)
-            }
+
+            {textHistorial && (
+              <Box>
+                <TextField
+                  label="Historial"
+                  color="tertiary"
+                  className="m-4 rounded-xl"
+                  onChange={(e) => setHistorial(e.target.value)}
+                  value={historial}
+                >
+                  Pon tu historial
+                </TextField>
+                <Button onClick={() => actualizarHistorial(ID, historial) && setYay(true)}>
+                  Actualizar
+                </Button>
+              </Box>
+            )}
+             {yay && (
+                  <Alert variant="filled" severity="success">
+                    Se actualizo el expediente!!!
+                  </Alert>
+                )}
+            {mostrarExpediente && (
+              <Box>
+                <Typography variant="body1" color="secondary">
+                  {expediente.historial}
+                </Typography>
+              </Box>
+            )}
 
             {nuevoExpediente && (
               <Box className="w-1/2">
@@ -208,12 +265,12 @@ export default function Expediente() {
                     <Button onClick={handleClose}>Cancelar</Button>
                     <Button
                       type="submit"
-                      onClick={() =>
-                        crearExpediente(ID, expediente) &&
-                        handleClose() &&
-                        showButtons(false) &&
-                        showNuevoExpediente(false)
-                      }
+                      onClick={() => {
+                        crearExpediente(ID, expediente);
+                        handleClose();
+                        showButtons(false);
+                        showNuevoExpediente(false);
+                      }}
                     >
                       CREAR
                     </Button>

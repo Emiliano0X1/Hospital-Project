@@ -18,7 +18,6 @@ export default function EmergenciaCard({ index, paciente }) {
             <Typography variant="h6">Nombre del Paciente : {paciente.name}</Typography>
             <Typography variant="h6">Telefono: {paciente.telefono}</Typography>
             <Typography variant="h6">Razon de Visita : {paciente.razonDeVisita}</Typography>
-            <Typography variant="h6">Cita Agendada: </Typography>
 
           </Box>
           <Box>

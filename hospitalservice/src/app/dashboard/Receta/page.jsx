@@ -14,15 +14,33 @@ import { useState } from "react";
 
 export default function Home() {
   // Crear los estados para los campos de texto
-  const [nombre, setNombre] = useState("");
-  const [apellido, setApellido] = useState("");
+  const [ID, setID] = useState("");
+  const [medicamentos, setMedicamentos] = useState("");
   const [especificaciones, setEspecificaciones] = useState("");
-
+  const [yay, setYay] = useState(false);
+  
+  const postReceta = async (id, medicamentos, especificaciones) => {
+const response = await fetch(`https://backend-hospital-8aqk.onrender.com/api/v1/receta/${id}`, 
+  {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify({
+      nombre: null,
+      medicamentos: medicamentos,
+      especificaciones: especificaciones,
+    }),
+  });
+}
   // Función para borrar todo
   const borrarTodo = () => {
-    setNombre("");
-    setApellido("");
+    setID("");
+    setMedicamentos("");
     setEspecificaciones("");
+    setYay(false);
   };
 
   return (
@@ -41,10 +59,10 @@ export default function Home() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   fullWidth
-                  label="Nombre del Paciente"
+                  label="ID del paciente"
                   variant="outlined"
-                  value={nombre}  
-                  onChange={(e) => setNombre(e.target.value)}  
+                  value={ID}  
+                  onChange={(e) => setID(e.target.value)}  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -52,8 +70,8 @@ export default function Home() {
                   fullWidth
                   label="Medicamentos"
                   variant="outlined"
-                  value={apellido}  
-                  onChange={(e) => setApellido(e.target.value)}  
+                  value={medicamentos}  
+                  onChange={(e) => setMedicamentos(e.target.value)}  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -68,13 +86,18 @@ export default function Home() {
                 />
               </Grid>
             </Grid>
+            {yay && (
+                  <Alert variant="filled" severity="success">
+                    Se creó la receta correctamente!!!
+                  </Alert>
+                )}
           </CardContent>
           <Box sx={{display: "flex",justifyContent: "flex-end", alignItems: "center", gap: 2, padding: 2}}>
             <Alert variant = "filled" severity="error">Asegurese de completar el formulario con la informacion necesaria y correcta</Alert>       
             <Button variant="contained" color="inherit" onClick={borrarTodo} >
               BORRAR TODO
             </Button>
-            <Button variant="contained" sx={{backgroundColor: "#0f6f32", "&:hover": {backgroundColor: "#19bb54",},}}>
+            <Button onClick={() => postReceta(ID, medicamentos, especificaciones) && setYay(true)} variant="contained" sx={{backgroundColor: "#0f6f32", "&:hover": {backgroundColor: "#19bb54",},}}>
               INGRESAR DATOS                         
             </Button>
           </Box>
